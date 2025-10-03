@@ -1,0 +1,6 @@
+        jogar_novamente = input(f"Voce deseja jogar novamente? ").lower()
+        if jogar_novamente == "sim":
+            jogo()
+        else:
+            print(f"voce escolher sair. ")
+            break

@@ -1,5 +1,6 @@
 import random
 
+pontuacao = 0
 def escolhaMapa():
     escolhaMapas = input("Escolha um mapa para adivinhar: Escolhas: africa, europa, america do sul  ").lower()
     paises_africa = [
@@ -37,27 +38,79 @@ def escolhaPais():
     escolhaPais = random.choice(lista_paises)
     return escolhaPais
 
+
+def escolhaDificuldade(escolhaDificuldade):
+    escolhaDificuldade = input("Escolha sua dificuldade: Facil, Medio ou Dificil. ").lower()
+
+    match escolhaDificuldade:
+        case "facil":
+            print(f"Voce escolheu a dificuldade {escolhaDificuldade}.")
+            return 50
+        case "dificil":
+            print(f"Voce escolheu a dificuldade {escolhaDificuldade}. ")
+            return 10
+
+
+    
+
+def jogarNovamente():
+        jogar_novamente = input("Deseja jogar novamente? ")
+        if jogar_novamente == "sim":
+            jogo()
+
 def jogo():
-    totalTentativas = 5
+    global pontuacao
+    totalTentativas = escolhaDificuldade(escolhaDificuldade)
     tentativas = 0
+
+    
+
+
     pais = escolhaPais()
-    print(pais)
+    
     print("Um país foi escolhido, Tente adivinhar.")
+    
+
+
+
+
+    
+
 
     while tentativas < totalTentativas:
         pais_digitado = input("Digite o nome do País: ").lower()
         tentativas += 1
+        print(pais)
 
         if pais_digitado == pais:
+            pontuacao += 100
+            print(f"Sua pontuacao atual: {pontuacao}. ")
             print(f"Parabéns! Você acertou! O país era: {pais}")
-            break
+            jogarNovamente()
+            
+        
         else:
             tentativas_restantes = totalTentativas - tentativas
             if tentativas_restantes > 0:
                 print(f"Tentativa incorreta. Você tem {tentativas_restantes} tentativas restantes.")
+                pontuacao +=50
+                print(f"Sua pontuacao atual: {pontuacao}. ")
             else:
                 print(f"Acabaram as tentativas! O país correto era: {pais}")
+                jogarNovamente()
+
+        
+        
+    
+
+
+    
+
 
 
 jogo()
+
+
+
+
 
